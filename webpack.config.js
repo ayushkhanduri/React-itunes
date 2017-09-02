@@ -25,6 +25,10 @@ let webpackConfig = {
                 test: /\.js$/,
                 loaders:['react-hot-loader', 'babel-loader'],
                 exclude: /node_modules/
+            },
+            { 
+                test: /\.css$/, 
+                loaders: [ 'style-loader', 'css-loader' ]
             }
         ]
     },
