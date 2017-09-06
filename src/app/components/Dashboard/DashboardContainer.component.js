@@ -11,6 +11,7 @@ export default class DashBoardContainer extends Component{
         super();
         this.state = {
             searchedInput: "",
+            numberOfItems: 25,
             songs: [],
             filteredDs: undefined,
             showFilters: false
@@ -21,7 +22,7 @@ export default class DashBoardContainer extends Component{
         return (
         <div id="dashboard">
             <HeaderUI/>
-            <DashBoardUI inputValue = {this.state.searchedInput} 
+            <DashBoardUI inputValue = {this.state.searchedInput} numberValue={this.state.numberOfItems}
             valueChanged={this.changeStateValue.bind(this)} toggleFilters={this.toggleFilters.bind(this)}
             getData={this.fetchApiData.bind(this)} addClass = {this.state.showFilters}/>
             {
@@ -40,10 +41,15 @@ export default class DashBoardContainer extends Component{
         })
     }    
 
-    changeStateValue(e){
-        this.setState({
-            searchedInput: e.target.value 
-        });
+    changeStateValue(e,type){
+        if(type ==="text")
+            this.setState({
+                searchedInput: e.target.value 
+            });
+        else
+            this.setState({
+                numberOfItems: Number(e.target.value)
+            })
     }
 
     toggleFilters(e){
@@ -53,11 +59,13 @@ export default class DashBoardContainer extends Component{
         console.log("Filter changed" + this.state.showFilters );
     }
 
-    fetchApiData(){
+    fetchApiData(e){
+        e.preventDefault();
         let url ="https://itunes.apple.com/search?term=";
         let regEx = new RegExp(' ','g');
         let searchedName = this.state.searchedInput.replace(regEx,'+');
         url += searchedName;
+        url += "&limit="+this.state.numberOfItems;
         fetch(url).then(resStream=> resStream.json()).then(jsonArr=>{
             console.log(jsonArr.results);
             this.setState({

@@ -1,3 +1,7 @@
 .btn-default{
     margin-left: 3%;
 }
+
+.dashboard > form > input:not(:first-child){
+    margin-left: 3%;
+}

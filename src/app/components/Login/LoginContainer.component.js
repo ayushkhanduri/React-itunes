@@ -2,7 +2,7 @@ import React,{ Component } from 'react';
 
 import FacebookComponent  from './Facebook.component';
 
-import LoginUI from '../../presentational/Login/LoginUI.component';
+import LoginHeaderUI from '../../presentational/Login/LoginHeaderUI.component';
 
 
 export default class LoginContainer extends Component{
@@ -11,7 +11,7 @@ export default class LoginContainer extends Component{
         const { history } = this.props;
         return(
             <div>
-                <LoginUI/>
+                <LoginHeaderUI/>
                 <FacebookComponent history = {history}/>
             </div>
         )

@@ -6,12 +6,13 @@ export default class FilterComponent extends Component{
     
     constructor(){
         super();
+        //all searches
         this.state = {
             allFilter : 
             {
                 "artistName" : "",
                 "primaryGenreName": "",
-                "trackPrice": 0
+                "collectionName": ""
             }
         }
     }
@@ -22,35 +23,19 @@ export default class FilterComponent extends Component{
 
     applyFilter(e,type){
         this.state.allFilter[type] = e.target.value;
-        let newArr = this.props.data;
+        let newArr = this.props.data.slice();
         for(let key in this.state.allFilter){
             if (!this.state.allFilter[key]){ 
                 continue;
             }else{
-                if(key != "trackPrice"){
-                    newArr = newArr.filter(item=>(
-                        item[key].toLowerCase().search(e.target.value.toLowerCase()) !== -1
-                    ))
-                }else{
-                    newArr = newArr.filter(item=>(
-                        item[key] <= Number(e.target.value)
-                    ))
-                }
+                newArr = newArr.filter((item,index)=>{
+                    if(item[key])
+                        return item[key].toLowerCase().search(this.state.allFilter[key]) !== -1; 
+                    
+                })
             }
         }
-        // if(e.target.value){
-        //     if(property !== "trackPrice"){
-        //         newArr = this.props.data.filter(item=>(
-        //             item[property].toLowerCase().search(e.target.value.toLowerCase()) !== -1
-        //         )
-        //     )}else{
-        //         newArr = this.props.data.filter(item=>(
-        //             item[property] <= Number(e.target.value)
-        //         ))
-        //     }
-        // }else{
-        //     newArr = this.props.data;
-        // }
+        
 
         console.log(newArr);
         this.props.onChangeFilter(newArr);
