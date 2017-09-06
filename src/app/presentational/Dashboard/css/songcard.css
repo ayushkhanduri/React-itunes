@@ -1,3 +1,11 @@
+.all-cards{
+    border: 2px solid #eee;
+    margin-top: 3%;
+}
+
+.cards-container {
+    padding: 3%;
+}
 .card-template{
     width: 50%;
     height: 60px;

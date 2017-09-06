@@ -1,9 +1,15 @@
     import React from 'react';
 
-    const DashboardUI = ({inputValue,getData,valueChanged}) =>(
+    import './css/dashboard.css';
+
+    const DashboardUI = ({inputValue,getData,valueChanged,toggleFilters,addClass}) =>(
         <div className="dashboard">
-            <input type="text" value= {inputValue} onChange={(event)=>valueChanged(event)} className="form-control input-sm" />
-            <button className="btn btn-default" onClick={getData}> Get Data</button>
+            <input type="text" value= {inputValue} onChange={(event)=>valueChanged(event)} className="form-control input-sm input-class inline" />
+            <button className="btn btn-default inline" onClick={getData}> Get Data</button>
+            <button className={(()=>{
+                    let defaultName = "btn btn-default inline ";
+                    return (addClass)?defaultName+"active": defaultName ;
+                })()} onClick={toggleFilters}>Apply Filters</button>
         </div>
     );
 

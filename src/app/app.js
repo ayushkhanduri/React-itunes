@@ -7,6 +7,8 @@ import 'jquery';
 import 'bootstrap/dist/js/bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 
+import './style.css';
+
 ReactDOM.render(<AppRouter/>,document.getElementById('app'));
 
 if(module.hot){

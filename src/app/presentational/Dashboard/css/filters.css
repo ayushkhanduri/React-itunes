@@ -1,0 +1,11 @@
+.allFilters{
+    margin-top: 3%;
+}
+
+.allFilters >input:not(:first-child) {
+    margin-left: 3%;
+}
+.slider{
+    padding-top: 5px;
+    width: 10% !important;
+}
