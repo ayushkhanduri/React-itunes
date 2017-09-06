@@ -61,6 +61,10 @@ export default class DashBoardContainer extends Component{
 
     fetchApiData(e){
         e.preventDefault();
+        if(!this.state.searchedInput.trim()){
+            alert("Enter a name of the song to be searched ! ");
+            return ;
+        }
         let url ="https://itunes.apple.com/search?term=";
         let regEx = new RegExp(' ','g');
         let searchedName = this.state.searchedInput.replace(regEx,'+');
@@ -68,6 +72,8 @@ export default class DashBoardContainer extends Component{
         url += "&limit="+this.state.numberOfItems;
         fetch(url).then(resStream=> resStream.json()).then(jsonArr=>{
             console.log(jsonArr.results);
+            if(jsonArr.results.length === 0)
+                alert("No entries found ! ");
             this.setState({
                 songs: jsonArr.results
             })
