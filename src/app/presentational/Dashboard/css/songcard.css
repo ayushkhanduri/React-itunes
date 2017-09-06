@@ -1,0 +1,14 @@
+.card-template{
+    width: 50%;
+    height: 60px;
+    border: 1px solid #eee;
+}
+
+.track-info{
+    display: inline-block;
+}
+
+.card-image{
+    width: 60px;
+    height: 60px;
+}
