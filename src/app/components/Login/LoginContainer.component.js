@@ -6,11 +6,6 @@ import LoginUI from '../../presentational/Login/LoginUI.component';
 
 
 export default class LoginContainer extends Component{
-
-    componentWillMount(){
-        
-    }
-    
     render(){
         console.log(this.props);
         const { history } = this.props;
@@ -20,8 +15,5 @@ export default class LoginContainer extends Component{
                 <FacebookComponent history = {history}/>
             </div>
         )
-    }
-
-    componentDidMount(){
     }
 }

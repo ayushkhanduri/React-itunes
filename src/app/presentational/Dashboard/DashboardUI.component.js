@@ -1,9 +1,10 @@
-import React from 'react';
+    import React from 'react';
 
-const DashboardUI = () =>(
-    <div className="dashboard">
-        this is the dashboard !
-    </div>
-);
+    const DashboardUI = ({getData}) =>(
+        <div className="dashboard">
+            <input type="text" className="form-control input-sm" />
+            <button className="btn btn-default" onClick={getData}> Get Data</button>
+        </div>
+    );
 
-export default DashboardUI;
+    export default DashboardUI;

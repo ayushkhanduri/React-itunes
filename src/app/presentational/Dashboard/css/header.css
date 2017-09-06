@@ -1,0 +1,11 @@
+.center{
+    text-align: center;
+    color: #fff !important;
+}
+.jumbotron{
+    background-color: rgb(90,200,250) !important;
+}
+.page-header{
+    margin-top: 0px !important;
+    padding-bottom: 0px !important;
+}

@@ -1,21 +1,47 @@
 import React from 'react';
-//import {Redirect} from 'react-router';
+import {Redirect,Route} from 'react-router';
 
-export const isAuthenticated = () =>{
+const PRIVATE_ROUTE= "/dashboard";
+const PUBLIC_ROUTE = "/";
+
+// const AuthRoute = (props) =>{
+//     const { isPrivate } = props;
+//     const { component } = props;
+//     const { path } =  props;
+//     if(isAuthenticated()){
+//         if(isPrivate){
+//             return <Route exact to= {path} component = {component}/>;
+//         }else{
+//             return <Redirect exact to = {PRIVATE_ROUTE}/>;
+//         }
+//     }else{
+//         if(isPrivate){
+//             return <Redirect exact to = {PUBLIC_ROUTE}/>;
+//         }else{
+//             return <Route exact to= {path} component = {component}/>;
+//         }
+//     }
+// }
+
+
+const isAuthenticated = () =>{
     const token = localStorage.getItem("Access_token");
-    console.log("balle ");
     return token? true: false;
 }
 
-export const checkAuth =(value,Redirect,Route,PassedComponent) => {
-    console.log(value);
-    if(isAuthenticated() && value==="root"){
-        return (<Redirect to="/dashboard"/>);
-    }else if(!isAuthenticated() && value==="home"){
-        return (<Redirect to="/"/>);
-    }else if(isAuthenticated() && value==="home"){
-        return (<Route to="/dashboard" component={PassedComponent}/>)
-    }else if(!isAuthenticated() && value==="root"){
-         return (<Route to="/dashboard" component={PassedComponent}/>)
+export const checkAuth =(value,PassedComponent) => {
+    const isPrivate = (value.indexOf("dashboard") !== -1) ? true : false;
+    if(isAuthenticated()){
+        if(isPrivate){
+            return (<Route exact to={value} component={PassedComponent}/>)
+        }else{
+            return (<Redirect to={PRIVATE_ROUTE}/>);
+        }
+    }else{
+        if(isPrivate){
+            return (<Redirect to={PUBLIC_ROUTE}/>)
+        }else{
+            return (<Route exact to={value} component={PassedComponent}/>)
+        }
     }
 }

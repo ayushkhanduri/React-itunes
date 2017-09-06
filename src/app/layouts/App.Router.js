@@ -14,8 +14,8 @@ const browserHistory = new createBrowserHistory();
 const AppRouter = () => (
     <Router history={browserHistory}>
         <div>
-            <Route exact render={()=>checkAuth("root",Redirect,Route,LoginContainer)} path="/"/>
-            <Route exact render={()=>checkAuth("home",Redirect,Route,DashboardContainer)} path="/dashboard"/>
+            <Route exact render={(props)=>checkAuth(props.match.path,LoginContainer)} path="/"/>
+            <Route exact render={(props)=>checkAuth(props.match.path,DashboardContainer)} path="/dashboard"/>
         </div>
     </Router>
 

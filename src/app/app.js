@@ -3,6 +3,10 @@ import ReactDOM from 'react-dom';
 
 import AppRouter from './layouts/App.Router';
 
+import 'jquery';
+import 'bootstrap/dist/js/bootstrap';
+import 'bootstrap/dist/css/bootstrap.css';
+
 ReactDOM.render(<AppRouter/>,document.getElementById('app'));
 
 if(module.hot){
