@@ -5,7 +5,10 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "webpack": "webpack"
+    "webpack": "webpack",
+    "start": "cross-env NODE_ENV=production npm run build:production && forever ./server.js",
+    "start:development": "cross-env NODE_ENV=development node ./devServer.js",
+    "build:production": "cross-env NODE_ENV=production webpack -p --progress"
   },
   "author": "",
   "license": "ISC",
@@ -26,8 +29,10 @@
   },
   "dependencies": {
     "bootstrap": "^3.3.7",
+    "cross-env": "^5.0.5",
     "css-loader": "^0.28.7",
     "express": "^4.15.4",
+    "forever": "^0.15.3",
     "jquery": "^3.2.1",
     "style-loader": "^0.18.2"
   }

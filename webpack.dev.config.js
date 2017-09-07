@@ -4,12 +4,12 @@ const webpack = require('webpack');
 const BUILD_DIR = path.resolve(__dirname,'build/client');
 const ENTRY_DIR = ['./src/app/app.js'];
 
-//const DEV_ENTRY = ENTRY_DIR.concat(['webpack-hot-middleware/client']);
+const DEV_ENTRY = ENTRY_DIR.concat(['webpack-hot-middleware/client']);
 
 let webpackConfig = {
     entry: {
         // the app key caused the file name to output as app.js in output:[name]
-        app: ENTRY_DIR
+        app: DEV_ENTRY
     },
     output: {
         path: BUILD_DIR,

@@ -1,29 +1,33 @@
 const express = require('express');
 const path = require('path');
-const webpack = require('webpack');
-const webpackMiddleWare = require('webpack-dev-middleware');
+const cluster = require('cluster');
 
-//init app
 const app = express();
 
-const webpackConfig = require('./webpack.config');
-const compiler = webpack(webpackConfig);
-
-
-//using webpack middleware for serving files on the fly
-app.use(webpackMiddleWare(compiler,{
-    publicPath: webpackConfig.output.publicPath
-}));
-
-//this is for hot reloading
-app.use(require('webpack-hot-middleware')(compiler)); 
+app.use(express.static(path.join(__dirname, 'build/client')));
 
 app.get('*',(req,res)=>{
     res.sendFile(path.join(__dirname,'src','index.html'));
 })
+ 
+if(cluster.isMaster){
+	const cores = require('os').cpus().length;
 
-app.listen(3000,(err)=>{
-    if(err)
-        return err;
-    console.log("server running at port 3000");
-})
+	console.log('Master cluster setting up', cores, 'workers...');
+	for(let i = 0; i < cores; i++) cluster.fork();
+
+	cluster.on('online', (worker) => console.log('Worker', worker.process.pid, 'is online'));
+	cluster.on('exit', (worker, code, signal) => {
+		console.log('Worker', worker.process.pid, 'died with code:', code, 'and signal:', signal);
+		console.log('Starting a new worker');
+		cluster.fork();
+	});
+}else {
+	app.listen(process.env.PORT || 8080, function(err) {
+	  if (err) {
+	    return console.error(err);
+	  }
+
+	  console.log('Listening at http://localhost:' + (process.env.PORT || 8080));
+	});
+}
